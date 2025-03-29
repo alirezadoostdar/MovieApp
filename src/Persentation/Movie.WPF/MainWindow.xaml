@@ -1,0 +1,77 @@
+﻿<Window x:Class="Movie.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Movie.WPF"
+        WindowStyle="None" Background="LightBlue"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="900" MinHeight="650" MinWidth="900">
+    <Window.Resources>
+       
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{StaticResource BackgroundColorPrimary}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="0.25*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Width="40" Name="btnClose" Click="btnClose_Click" Height="40">X</Button>
+            <Button Grid.Column="1" Width="40" Height="40" Name="btnMinimized" Click="btnMinimized_Click">_</Button>
+            <Rectangle Grid.Column="2" Fill="{StaticResource BackgroundColorSecondary}" Name="Rectop" MouseDown="Rectop_MouseDown" Cursor="ScrollAll"/>
+            <TextBlock Grid.Column="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">My Data base of Movie</TextBlock>
+            <Rectangle Grid.Column="4" Fill="{StaticResource BackgroundColorSecondary}"/>
+        </Grid>
+        <StackPanel Grid.Row="1" Background="{StaticResource BackgroundColorPrimary}"></StackPanel>
+        <DockPanel Grid.Row="2">
+            <DockPanel.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Margin" Value="3"/>
+                </Style>
+            </DockPanel.Resources>
+            <RepeatButton Name="btnMoveLeft" Click="btnMoveLeft_Click" DockPanel.Dock="Left" Height="50" Width="50">
+                <RepeatButton.Background>
+                    <ImageBrush ImageSource="/Content/Icons/keyboard-left-arrow-button.png"/>
+                </RepeatButton.Background>
+            </RepeatButton>
+            <RepeatButton Name="btnMoveRight" Click="btnMoveRight_Click" DockPanel.Dock="Right" Height="50" Width="50">
+                <RepeatButton.Background>
+                    <ImageBrush ImageSource="/Content/Icons/keyboard-right-arrow-button.png"/>
+                </RepeatButton.Background>
+            </RepeatButton>
+            <ScrollViewer  Name="SvMovieList" Background="{StaticResource BackgroundColorSecondary}"
+                      VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden"
+                      CanContentScroll="False" SnapsToDevicePixels="True">
+
+                <StackPanel Orientation="Horizontal">
+                    <Border Style="{StaticResource ImageBorder}">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Content/Images/POSTER-1-JAHAN-Final.jpg" Stretch="UniformToFill"></ImageBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                    <Image Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"></Image>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+    </Grid>
+</Window>
