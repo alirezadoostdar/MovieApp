@@ -9,25 +9,50 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Content\Icons\add-plus-button.png" />
+    <None Remove="Content\Icons\clapperboard.png" />
+    <None Remove="Content\Icons\connection-indicator.png" />
+    <None Remove="Content\Icons\horizontal-line-remove-button.png" />
     <None Remove="Content\Icons\keyboard-left-arrow-button.png" />
     <None Remove="Content\Icons\keyboard-right-arrow-button.png" />
+    <None Remove="Content\Icons\rate-star-button.png" />
+    <None Remove="Content\Icons\user-shape.png" />
+    <None Remove="Content\Icons\users-social-symbol.png" />
     <None Remove="Content\Images\POSTER-1-JAHAN-Final.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Convertors\" />
     <Folder Include="Resources\" />
-    <Folder Include="Views\" />
     <Folder Include="Validation\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="WPFCustomMessageBox" Version="1.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.14" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" /> 
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Movie.Infrastructure\Movie.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\core\Movie.Application\Movie.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Content\Icons\add-plus-button.png" />
+    <Resource Include="Content\Icons\clapperboard.png" />
+    <Resource Include="Content\Icons\connection-indicator.png" />
+    <Resource Include="Content\Icons\horizontal-line-remove-button.png" />
     <Resource Include="Content\Icons\keyboard-left-arrow-button.png" />
     <Resource Include="Content\Icons\keyboard-right-arrow-button.png" />
+    <Resource Include="Content\Icons\rate-star-button.png" />
+    <Resource Include="Content\Icons\user-shape.png" />
+    <Resource Include="Content\Icons\users-social-symbol.png" />
     <Resource Include="Content\Images\POSTER-1-JAHAN-Final.jpg" />
   </ItemGroup>
 
