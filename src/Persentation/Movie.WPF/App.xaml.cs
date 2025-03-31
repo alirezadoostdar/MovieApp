@@ -6,6 +6,7 @@ using Movie.Infrastructure;
 using System;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Windows;
 
 namespace Movie.WPF
@@ -26,8 +27,10 @@ namespace Movie.WPF
 
                     //if( dbType == "sqllite")
                     //{
-                    //    services.AddDbContext<MovieDbContext>(options =>
-                    //        options.UseSqlite("Data Source=movie.db"));
+                    string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Movie.db");
+                    string connectionString = $"Data Source={dbPath}";
+                    services.AddDbContext<MovieDbContext>(options =>
+                        options.UseSqlite(connectionString));
                     //}
                     services.RegisterInfrastructureServices();
                     services.AddScoped<DirectorService>();
@@ -39,7 +42,7 @@ namespace Movie.WPF
             await AppHost.StartAsync();
             base.OnStartup(e);
 
-            
+
         }
 
         protected override async void OnExit(ExitEventArgs e)

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Movie.WPF.Views"
+        xmlns:validate="clr-namespace:Movie.WPF.Validation"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         WindowStyle="None" ShowInTaskbar="False"
         Title="vwAddMovie" Height="450" Width="400">
@@ -16,6 +17,16 @@
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="5"/>
         </Style>
+        <ControlTemplate x:Key="ErrorTemplate">
+            <DockPanel>
+                <Label DockPanel.Dock="Top" Content="*" Cursor="Help" 
+                       ToolTip="{Binding ElementName=AdornedElementPlaceholder , Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
+                       FontWeight="Bold" Foreground="Orange" VerticalAlignment="Bottom" />
+                <Border>
+                    <AdornedElementPlaceholder Name="AdornedElementPlaceholder"/>
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -34,7 +45,15 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0">Title</TextBlock>
-        <TextBox  Grid.Row="0" Grid.Column="1" ></TextBox>
+        <TextBox Name="txtTitle" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"  Grid.Row="0" Grid.Column="1" >
+            <TextBox.Text>
+                <Binding Path="Title" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validate:RequiredValidation ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <TextBlock Grid.Row="1" Grid.Column="0">Description</TextBlock>
         <TextBox  Grid.Row="1" Grid.Column="1" ></TextBox>
@@ -55,12 +74,13 @@
 
         <TextBlock Grid.Row="6" Grid.Column="0">Image</TextBlock>
         <StackPanel Orientation="Vertical" Grid.Row="6" Grid.Column="1" Margin="5">
-            <Image Margin="5" Source="/Content/Images/POSTER-1-JAHAN-Final.jpg" Width="150" Height="150"/>
-            <Button Margin="5">Upload Image</Button>
+            <Image Name="ImgPoster" Margin="5" Source="/Content/Images/POSTER-1-JAHAN-Final.jpg" Width="150" Height="150"/>
+            <Label Margin="5" Name="lblImagePath"></Label>
+            <Button Margin="5" Name="btnFileDialog" Click="btnFileDialog_Click">Upload Image</Button>
         </StackPanel>
 
         <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
-            <Button>Save</Button>
+            <Button Name="btnSave" Click="btnSave_Click">Save</Button>
             <Button>Cancel</Button>
         </StackPanel>
     </Grid>

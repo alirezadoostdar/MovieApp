@@ -7,6 +7,7 @@
         xmlns:uc="clr-namespace:Movie.WPF.UserControls"
         WindowStyle="None" Background="LightBlue"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="MainWindow" Height="500" Width="900" MinHeight="650" MinWidth="900">
     <Window.Resources>
 
@@ -113,7 +114,8 @@
                         </Button.Background>
                     </Button>
                     <Border CornerRadius="50" BorderBrush="Gray" >
-                        <Button  Name="btnAddMovie" Cursor="Hand"  BorderBrush="Black" Height="30" Width="30">
+                        <Button  Name="btnAddMovie" Cursor="Hand"  BorderBrush="Black" Height="30" Width="30"
+                                 Click="btnAddMovie_Click">
                             <Button.Background>
                                 <ImageBrush ImageSource="/Content/Icons/add-plus-button.png"/>
                             </Button.Background>

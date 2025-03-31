@@ -17,7 +17,7 @@ internal class DirectorRepository : IDirectorRepository
     }
     public void Add(Director director)
     {
-        context.Add(director);
+        context.Directors.Add(director);
         context.SaveChanges();
     }
 

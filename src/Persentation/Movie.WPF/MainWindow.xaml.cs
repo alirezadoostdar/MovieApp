@@ -1,4 +1,6 @@
-﻿using Movie.WPF.Views;
+﻿using Movie.Domain.Entities;
+using Movie.WPF.UserControls;
+using Movie.WPF.Views;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,12 +22,23 @@ namespace Movie.WPF
         public MainWindow()
         {
             InitializeComponent();
-            foreach (UIElement child in spMovieList.Children)
-            {
-                child.MouseDown += Child_MouseDown;
-                child.MouseWheel += Child_MouseWheel;
-            }
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var list = new List<Film> { new Film() }; //list film
+            //foreach (var item in list)
+            //{
+            //    var path = AppDomain.CurrentDomain.BaseDirectory + "\\Images\\Movie\\";
+            //    var poster = new BitmapImage(new Uri(path + item.Poster));
+            //    var us = new usImageWithBorder() { Value = item, Source = poster };
+            //    us.MouseWheel += Child_MouseWheel;
+            //    us.MouseDown += Child_MouseDown;
+            //    spMovieList.Children.Add(us);
+            //}
+        }
+
+
 
         private void Child_MouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -78,5 +91,14 @@ namespace Movie.WPF
             win.Owner = this;
             win.ShowDialog();
         }
+
+        private void btnAddMovie_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new vwAddMovie();
+            win.Owner = this;
+            win.ShowDialog();
+        }
+
+
     }
 }
