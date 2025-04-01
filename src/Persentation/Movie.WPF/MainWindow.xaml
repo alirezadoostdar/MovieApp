@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Movie.WPF"
         xmlns:uc="clr-namespace:Movie.WPF.UserControls"
-        WindowStyle="None" Background="LightBlue"
+        WindowStyle="None" Background="LightBlue" WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="MainWindow" Height="500" Width="900" MinHeight="650" MinWidth="900">
+        Title="MainWindow" Height="650" Width="900" MinHeight="650" MinWidth="900">
     <Window.Resources>
 
     </Window.Resources>
@@ -30,7 +30,13 @@
             <Button Grid.Column="1"  Style="{StaticResource ResourceKey=TitleBarButton}" Width="40" Height="40" Name="btnMinimized" Click="btnMinimized_Click">_</Button>
             <Rectangle Grid.Column="2" Fill="{StaticResource BackgroundColorSecondary}" Name="Rectop" MouseDown="Rectop_MouseDown" Cursor="ScrollAll"/>
             <TextBlock Grid.Column="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">My Data base of Movie</TextBlock>
-            <Rectangle Grid.Column="4" Fill="{StaticResource BackgroundColorSecondary}"/>
+            <WrapPanel Grid.Column="4" Background="{StaticResource BackgroundColorSecondary}">
+                <Button Width="40" Height="40" Name="btnSetting" Click="btnSetting_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Content/Icons/settings-cogwheel-button.png" />
+                    </Button.Background>
+                </Button>
+            </WrapPanel>
         </Grid>
         <Image Grid.Row="1" Stretch="UniformToFill" Opacity="0.3" 
                Source="/Content/Images/POSTER-1-JAHAN-Final.jpg"

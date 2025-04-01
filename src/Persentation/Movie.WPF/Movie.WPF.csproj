@@ -16,6 +16,7 @@
     <None Remove="Content\Icons\keyboard-left-arrow-button.png" />
     <None Remove="Content\Icons\keyboard-right-arrow-button.png" />
     <None Remove="Content\Icons\rate-star-button.png" />
+    <None Remove="Content\Icons\settings-cogwheel-button.png" />
     <None Remove="Content\Icons\user-shape.png" />
     <None Remove="Content\Icons\users-social-symbol.png" />
     <None Remove="Content\Images\POSTER-1-JAHAN-Final.jpg" />
@@ -52,6 +53,7 @@
     <Resource Include="Content\Icons\keyboard-left-arrow-button.png" />
     <Resource Include="Content\Icons\keyboard-right-arrow-button.png" />
     <Resource Include="Content\Icons\rate-star-button.png" />
+    <Resource Include="Content\Icons\settings-cogwheel-button.png" />
     <Resource Include="Content\Icons\user-shape.png" />
     <Resource Include="Content\Icons\users-social-symbol.png" />
     <Resource Include="Content\Images\POSTER-1-JAHAN-Final.jpg" />

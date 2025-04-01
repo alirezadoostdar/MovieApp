@@ -1,24 +1,135 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Movie.Application.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Movie.Application.Dtos;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Movie.WPF.Commands;
+using Microsoft.VisualBasic.FileIO;
+using System.Windows;
+using System.ComponentModel;
 
 namespace Movie.WPF.ViewModels;
 
-public class DirectorViewModel
+public class DirectorViewModel : BaseViewModel, IDataErrorInfo
 {
-    public int Id { get; set; }
-    public string FullName { get; set; }
-    public string Bio { get; set; }
+
+    public ObservableCollection<DirectorDto> Items { get; set; }
     public readonly DirectorService directorService;
+
+    public RelayCommand AddCommand => new RelayCommand(execute => AddDirector());
+
+    public RelayCommand DeleteCommand => new RelayCommand(execute => DeleteDirector(), canExecute => IsUsedDirector());
 
     public DirectorViewModel()
     {
         directorService = App.AppHost.Services.GetRequiredService<DirectorService>();
-        directorService.Add(new Movie.Application.Dtos.DirectorDto(0, "sorosh sehat", "coment"));
-        var list = directorService.GetAll();
+
+        Items = new ObservableCollection<DirectorDto>(directorService.GetAll());
+
+        Items.CollectionChanged += DirectorList_CollectionChanged;
     }
+
+    private void DirectorList_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+        NotifyPropertyChanged(nameof(Items));
+    }
+
+    private DirectorDto director;
+
+    public DirectorDto Director
+    {
+        get { return director; }
+        set
+        {
+            director = value;
+            Id = value.Id;
+            Name = value.Title;
+            Bio = value.Bio;
+            NotifyPropertyChanged(nameof(Director));
+        }
+    }
+
+    private int id;
+
+    public int Id
+    {
+        get { return id; }
+        set { id = value; NotifyPropertyChanged(); }
+    }
+
+    private string name;
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; NotifyPropertyChanged(); }
+    }
+
+    private string bio;
+
+    public string Bio
+    {
+        get { return bio; }
+        set { bio = value; NotifyPropertyChanged(); }
+    }
+
+    public string Error => null;
+
+    public string this[string columnName]
+    {
+        get
+        {
+            switch (columnName)
+            {
+                case nameof(Name):
+                    {
+                        if (string.IsNullOrEmpty(Name))
+                            return "Please insert title";
+                        break;
+                    }
+                case nameof(Bio):
+                    {
+                        if (string.IsNullOrEmpty(Bio))
+                            return "Please insert biography";
+                        break;
+                    }
+            }
+            return null;
+        }
+    }
+    private void DeleteDirector()
+    {
+        try
+        {
+            if (MessageBox.Show($"Are you sure to delete this item {Id}?", "Delete Alarm",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+
+            }
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+    }
+
+    private bool IsUsedDirector()
+    {
+        return directorService.IsUsed(director.Id);
+    }
+
+    private void AddDirector()
+    {
+        try
+        {
+            directorService.Add(new DirectorDto(0, Name, Bio));
+            throw new Exception("has problem");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+
 }

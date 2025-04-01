@@ -10,5 +10,6 @@ namespace Movie.Domain.Interfaces;
 public interface IDirectorRepository
 {
     void Add(Director director);
-    List<Director> GetAll();
+    IEnumerable<Director> GetAll();
+    bool IsUsed(int  id);
 }

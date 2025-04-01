@@ -28,8 +28,13 @@ public class DirectorService
         });
     }
 
-    public List<DirectorDto> GetAll()
+    public bool IsUsed(int id)
     {
-        return repository.GetAll().Select(x => new DirectorDto(x.Id, x.FullName,x.Bio)).ToList();
+        return repository.IsUsed(id);
+    }
+
+    public IEnumerable<DirectorDto> GetAll()
+    {
+        return repository.GetAll().Select(x => new DirectorDto(x.Id, x.FullName,x.Bio));
     }
 }

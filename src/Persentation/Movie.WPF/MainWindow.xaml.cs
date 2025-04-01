@@ -99,6 +99,11 @@ namespace Movie.WPF
             win.ShowDialog();
         }
 
-
+        private void btnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new SettingWindow();
+            win.Owner = this;
+            win.ShowDialog();
+        }
     }
 }

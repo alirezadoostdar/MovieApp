@@ -21,8 +21,13 @@ internal class DirectorRepository : IDirectorRepository
         context.SaveChanges();
     }
 
-    public List<Director> GetAll()
+    public IEnumerable<Director> GetAll()
     {
         return context.Directors.ToList();
+    }
+
+    public bool IsUsed(int id)
+    {
+        return context.Films.Any(x => x.DirectorId == id);
     }
 }
