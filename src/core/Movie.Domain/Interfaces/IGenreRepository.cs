@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Movie.Domain.Interfaces;
 
-public interface IDirectorRepository
+public interface IGenreRepository
 {
-    void Add(Director director);
-    IEnumerable<Director> GetAll();
-    bool IsUsed(int  id);
-    void Update(Director director);
+    void Add(Genre genre);
+    void Update(Genre genre);
     void Delete(int id);
+    IEnumerable<Genre> GetAll();
+    bool IsUsed(int id);
+    bool IsExists(string title);
 }

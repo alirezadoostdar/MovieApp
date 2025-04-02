@@ -16,7 +16,7 @@ public static class ConfigureServices
         IConfiguration configuration)
     {
         services.AddScoped<DirectorService>();
-
+        services.AddScoped<GenreService>();
         return services;
     }
 }

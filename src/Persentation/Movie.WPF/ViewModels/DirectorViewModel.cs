@@ -7,6 +7,8 @@ using Movie.WPF.Commands;
 using Microsoft.VisualBasic.FileIO;
 using System.Windows;
 using System.ComponentModel;
+using Movie.Domain.Entities;
+using System.IO;
 
 namespace Movie.WPF.ViewModels;
 
@@ -18,7 +20,27 @@ public class DirectorViewModel : BaseViewModel, IDataErrorInfo
 
     public RelayCommand AddCommand => new RelayCommand(execute => AddDirector());
 
-    public RelayCommand DeleteCommand => new RelayCommand(execute => DeleteDirector(), canExecute => IsUsedDirector());
+    public RelayCommand DeleteCommand => new RelayCommand(execute => DeleteDirector(), canExecute => !IsUsedDirector());
+    public RelayCommand UpdateCommand
+    {
+        get
+        {
+            return new RelayCommand(exc => UpdateDirector(), canExe => Id > 0);
+        }
+    }
+
+    private void UpdateDirector()
+    {
+        try
+        {
+            directorService.Update(new DirectorDto(Id, Name, Bio));
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+    }
 
     public DirectorViewModel()
     {
@@ -42,9 +64,12 @@ public class DirectorViewModel : BaseViewModel, IDataErrorInfo
         set
         {
             director = value;
-            Id = value.Id;
-            Name = value.Title;
-            Bio = value.Bio;
+            if (director != null)
+            {
+                Id = value.Id;
+                Name = value.Title;
+                Bio = value.Bio;
+            }
             NotifyPropertyChanged(nameof(Director));
         }
     }
@@ -101,22 +126,25 @@ public class DirectorViewModel : BaseViewModel, IDataErrorInfo
     {
         try
         {
-            if (MessageBox.Show($"Are you sure to delete this item {Id}?", "Delete Alarm",
+            if (MessageBox.Show($"Are you sure to delete this item {director.Id}?", "Delete Alarm",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-
+                directorService.Delete(director.Id);
             }
         }
         catch (Exception ex)
         {
-
-            throw;
+            MessageBox.Show(ex.Message, "Unexpected error", MessageBoxButton.OK
+                , MessageBoxImage.Error);
         }
     }
 
     private bool IsUsedDirector()
     {
-        return directorService.IsUsed(director.Id);
+        if (Id == null)
+            return false;
+        else
+            return directorService.IsUsed(Id);
     }
 
     private void AddDirector()

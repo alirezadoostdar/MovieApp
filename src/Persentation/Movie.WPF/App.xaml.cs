@@ -34,6 +34,7 @@ namespace Movie.WPF
                     //}
                     services.RegisterInfrastructureServices();
                     services.AddScoped<DirectorService>();
+                    services.AddScoped<GenreService>();
                 }).Build();
         }
 

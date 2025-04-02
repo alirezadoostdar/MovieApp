@@ -34,6 +34,7 @@ namespace Movie.WPF.Views
         private void btnGenres_Click(object sender, RoutedEventArgs e)
         {
             spContent.Children.Clear();
+            spContent.Children.Add(new GenreUserControl());
         }
     }
 }

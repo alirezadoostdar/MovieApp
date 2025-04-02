@@ -28,6 +28,17 @@ public class DirectorService
         });
     }
 
+    public void Update(DirectorDto director)
+    {
+
+        repository.Update(new Director { Id = director.Id, FullName = director.Title, Bio = director.Bio });
+    }
+
+    public void Delete(int id)
+    {
+        repository.Delete(id);
+    }
+
     public bool IsUsed(int id)
     {
         return repository.IsUsed(id);

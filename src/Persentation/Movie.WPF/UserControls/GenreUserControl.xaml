@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Movie.WPF.UserControls.GenreUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Movie.WPF.UserControls"
+             xmlns:vw ="clr-namespace:Movie.WPF.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vw:GenreViewModel/>
+    </UserControl.DataContext>
+    <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width=".5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.ColumnSpan="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Margin="5" HorizontalContentAlignment="Center" 
+                          FontSize="16" Background="Aqua" 
+                          Content="Manage of Genres" 
+                          FontWeight="Bold"
+                          VerticalContentAlignment="Center">
+
+                    </Label>
+                </Grid>
+                <Label Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center"
+                      HorizontalContentAlignment="Right" Margin="5">Id</Label>
+                <Label Grid.Row="2" Grid.Column="0" VerticalContentAlignment="Center"
+      HorizontalContentAlignment="Right" Margin="5">Title</Label>
+
+                <TextBox Text="{Binding Id}" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="False"></TextBox>
+                <TextBox Text="{Binding Title}" Grid.Row="2" Grid.Column="1" Margin="5" IsEnabled="True"></TextBox>
+                <Grid Grid.Row="3" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{Binding AddCommand}" Margin="5" Grid.Column="0">Add</Button>
+                    <Button Margin="5" Grid.Column="1">Update</Button>
+                    <Button Margin="5" Grid.Column="2">Delete</Button>
+                </Grid>
+            </Grid>
+
+
+            <Grid Grid.Row="1">
+                <DataGrid Margin="5" AutoGenerateColumns="False"
+                          ItemsSource="{Binding genres}"
+                          SelectedItem="{Binding Genre}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="50"/>
+                        <DataGridTextColumn Binding="{Binding Title}" Header="Genre" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
