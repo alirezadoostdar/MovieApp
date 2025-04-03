@@ -20,8 +20,8 @@ public class DirectorViewModel : BaseViewModel, IDataErrorInfo
 
     public RelayCommand AddCommand => new RelayCommand(execute => AddDirector());
 
-    public RelayCommand DeleteCommand => new RelayCommand(execute => DeleteDirector(), canExecute => !IsUsedDirector());
-    public RelayCommand UpdateCommand
+    public RelayCommand DeleteCommand => new RelayCommand(execute => DeleteDirector(), canExecute => !IsUsedDirector() && Id > 0);
+    public RelayCommand UpdateCommand 
     {
         get
         {
@@ -34,11 +34,12 @@ public class DirectorViewModel : BaseViewModel, IDataErrorInfo
         try
         {
             directorService.Update(new DirectorDto(Id, Name, Bio));
+            LoadData();
         }
         catch (Exception ex)
         {
+            MessageBox.Show(ex.Message, "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            throw;
         }
     }
 
@@ -46,14 +47,30 @@ public class DirectorViewModel : BaseViewModel, IDataErrorInfo
     {
         directorService = App.AppHost.Services.GetRequiredService<DirectorService>();
 
-        Items = new ObservableCollection<DirectorDto>(directorService.GetAll());
-
-        Items.CollectionChanged += DirectorList_CollectionChanged;
+        LoadData();
+    }
+    public void LoadData()
+    {
+        if (directors is null)
+            directors = new ObservableCollection<DirectorDto>();
+         var list = directorService.GetAll();
+        Directors.Clear();
+        foreach (var item in list) 
+        {
+            Directors.Add(item);
+        }
     }
 
-    private void DirectorList_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    private ObservableCollection<DirectorDto> directors;
+
+    public ObservableCollection<DirectorDto> Directors
     {
-        NotifyPropertyChanged(nameof(Items));
+        get { return directors; }
+        set 
+        {
+            directors = value; 
+            NotifyPropertyChanged(nameof(Items));
+        }
     }
 
     private DirectorDto director;
@@ -130,6 +147,7 @@ public class DirectorViewModel : BaseViewModel, IDataErrorInfo
                 MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 directorService.Delete(director.Id);
+                LoadData();
             }
         }
         catch (Exception ex)
@@ -152,11 +170,11 @@ public class DirectorViewModel : BaseViewModel, IDataErrorInfo
         try
         {
             directorService.Add(new DirectorDto(0, Name, Bio));
-            throw new Exception("has problem");
+            LoadData();
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "Unexpected Error",MessageBoxButton.OK,MessageBoxImage.Error);
         }
     }
 

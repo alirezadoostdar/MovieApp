@@ -5,45 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:Movie.WPF.ViewModels"
              xmlns:local="clr-namespace:Movie.WPF.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"          
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:DirectorViewModel/>
     </UserControl.DataContext>
-    <UserControl.Resources>
-        <Style TargetType="TextBox">
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="BorderBrush" Value="Red"/>
-                    <Setter Property="ToolTip"
-                                    Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                                    Path=(Validation.Errors)[0].ErrorContent}"/>
-                </Trigger>
-            </Style.Triggers>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Width" Value="150"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Validation.ErrorTemplate">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <DockPanel>
-                            <AdornedElementPlaceholder DockPanel.Dock="Left" />
-                            <Label Foreground="OrangeRed" Content="{Binding [0].ErrorContent}"></Label>
-                        </DockPanel>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="5"/>
-        </Style>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Padding" Value="5"/>
-        </Style>
-    </UserControl.Resources>
+
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
@@ -65,16 +33,31 @@
                 </Grid.RowDefinitions>
                 <TextBlock Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right" 
                        Grid.Column="0" Grid.Row="0">Id</TextBlock>
+                <!--<TextBox
+                        x:Name="NameTextBox"
+                        materialDesign:HintAssist.HelperText="Helper text longer than error"
+                        materialDesign:HintAssist.Hint="Name">
+                    <TextBox.Text>
+                        <Binding
+                         Path="Name"
+                         UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                <domain:NotEmptyValidationRule
+          ValidatesOnTargetUpdated="True" xmlns:domain="clr-namespace:MaterialDesignDemo.Domain" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>-->
                 <TextBlock Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0">Full Name</TextBlock>
                 <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="0">Bioghraphy</TextBlock>
 
 
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" IsEnabled="False"
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="15" IsEnabled="False"
                      Text="{Binding Id, ValidatesOnDataErrors=True}"></TextBox>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" 
-         Text="{Binding Name, ValidatesOnDataErrors=True}"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="15" 
+                        Text="{Binding Name, ValidatesOnDataErrors=True}"></TextBox>
                 <TextBox Grid.Row="2"
-                     AcceptsReturn="True" Height="70" Margin="5" 
+                     AcceptsReturn="True" Height="70" Margin="15" 
                      Grid.Column="1"
                      Text="{Binding Path=Bio, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"></TextBox>
 
@@ -91,7 +74,7 @@
             </Grid>
             <StackPanel Grid.Row="1">
                 <DataGrid Margin="5" VerticalScrollBarVisibility="Auto"
-                      ItemsSource="{Binding Items}" 
+                      ItemsSource="{Binding Directors,UpdateSourceTrigger=PropertyChanged}" 
                       SelectedItem="{Binding Director}" 
                       AutoGenerateColumns="False">
                     <DataGrid.Columns>
@@ -103,5 +86,4 @@
             </StackPanel>
         </Grid>
     </ScrollViewer>
-
 </UserControl>

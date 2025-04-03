@@ -11,7 +11,7 @@ using Movie.Infrastructure;
 namespace Movie.Infrastructure.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20250330225900_InitialCreate")]
+    [Migration("20250403130326_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

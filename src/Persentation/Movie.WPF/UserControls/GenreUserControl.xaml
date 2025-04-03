@@ -54,8 +54,8 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Button Command="{Binding AddCommand}" Margin="5" Grid.Column="0">Add</Button>
-                    <Button Margin="5" Grid.Column="1">Update</Button>
-                    <Button Margin="5" Grid.Column="2">Delete</Button>
+                    <Button Command="{Binding UpdateCommand}" Margin="5" Grid.Column="1">Update</Button>
+                    <Button Command="{Binding DeleteCommand}" Margin="5" Grid.Column="2">Delete</Button>
                 </Grid>
             </Grid>
 
@@ -66,7 +66,7 @@
                           SelectedItem="{Binding Genre}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="50"/>
-                        <DataGridTextColumn Binding="{Binding Title}" Header="Genre" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding Title}" Header="Genre" Width="200"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

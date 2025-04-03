@@ -6,8 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+
 
 namespace Movie.WPF.ViewModels;
 
@@ -55,7 +58,7 @@ public class GenreViewModel : BaseViewModel
             if (genre != null)
             {
                 Id = value.Id;
-                title = value.Title;
+                Title = value.Title;
             }
             NotifyPropertyChanged(nameof(genre));
         }
@@ -64,22 +67,63 @@ public class GenreViewModel : BaseViewModel
     #region Commands
     public RelayCommand AddCommand => new RelayCommand(exe => Add());
 
-    public RelayCommand UpdateCommand => new RelayCommand(exc => Update() );
+    public RelayCommand UpdateCommand => new RelayCommand(exc => Update(),canExc => Id > 0 );
+
+    public RelayCommand DeleteCommand => new RelayCommand(exe => Delete(), canExe => Id > 0);
+
+    private void Delete()
+    {
+        try
+        {
+            if(MessageBox.Show($"are you sure to delete this itme by id {Id}", "danger" ,MessageBoxButton.YesNo,
+                MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+              genreService.Delete(id);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Unexpected error", MessageBoxButton.OK
+    , MessageBoxImage.Error);
+        }
+    }
+
+    private bool IsUsed()
+    {
+        if (Id == null)
+            return false;
+        return genreService.IsUsedBefore(id);
+    }
 
     private void Update()
     {
-        throw new NotImplementedException();
+        try
+        {
+            genreService.Update(new GenreDto { Id = Id, Title = Title });
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Unexpected error", MessageBoxButton.OK
+            , MessageBoxImage.Error);
+        }
     }
     #endregion
 
-    public Func<GenreDto, bool> IsDuplicate;
-    public bool salaryCalculate(Func<GenreDto,bool> func)
-    {
-        return func(new GenreDto() { Id = 10, Title = "dsss" });
-    }
   
     public void Add()
     {
-        genreService.Add(new GenreDto { Id = id, Title = Title });
+        try
+        {
+            genreService.Add(new GenreDto { Id = 0, Title = Title });
+            MessageBox.Show($"new genre {Title} added successfully", "success", MessageBoxButton.OK,
+                MessageBoxImage.Information);
+            Id = 0;
+            Title = string.Empty;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Unexpected error", MessageBoxButton.OK
+             , MessageBoxImage.Error);
+        }
     }
 }
