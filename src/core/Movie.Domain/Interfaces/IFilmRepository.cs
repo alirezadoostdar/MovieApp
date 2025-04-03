@@ -10,8 +10,8 @@ namespace Movie.Domain.Interfaces;
 public interface IFilmRepository
 {
     void Add(Film film);
-    List<Film> GetAll();    
+    IEnumerable<Film> GetAll();    
     void Update(Film film);
-    void Delete(Film film);
+    void Delete(int id);
 
 }

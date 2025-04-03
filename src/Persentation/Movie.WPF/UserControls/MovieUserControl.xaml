@@ -71,7 +71,7 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
-                <DataGrid>
+                <DataGrid Margin="5">
                     
                 </DataGrid>
             </Grid>
