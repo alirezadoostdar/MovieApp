@@ -15,7 +15,23 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical"
+            Background="AliceBlue">
 
+            <Button Margin="10" Name="btnMovies" Click="btnMovies_Click">Movies</Button>
+            <Button Margin="10" Name="btnDirector" Click="btnDirector_Click">Directors</Button>
+            <Button Margin="10" Name="btnGenres" Click="btnGenres_Click">Genrs</Button>
+            
+        </StackPanel>
+        <StackPanel Grid.Column="1" Name="spContent">
+
+        </StackPanel>
+    </Grid>
     <!--<materialDesign:DialogHost DialogTheme="Inherit"
                            Identifier="RootDialog"
                            SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
@@ -201,19 +217,5 @@
             </DockPanel>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>-->
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical"
-            Background="AliceBlue">
 
-                <Button Margin="10" Name="btnDirector" Click="btnDirector_Click">Directors</Button>
-                <Button Margin="10" Name="btnGenres" Click="btnGenres_Click">Genrs</Button>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Name="spContent">
-            
-        </StackPanel>
-    </Grid>
 </Window>

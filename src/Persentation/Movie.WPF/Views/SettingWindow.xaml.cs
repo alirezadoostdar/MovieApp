@@ -25,6 +25,8 @@ namespace Movie.WPF.Views
         public SettingWindow()
         {
             InitializeComponent();
+            spContent.Children.Add(new MovieUserControl());
+
         }
 
         private void btnDirector_Click(object sender, RoutedEventArgs e)
@@ -39,64 +41,70 @@ namespace Movie.WPF.Views
             spContent.Children.Add(new GenreUserControl());
         }
 
-    //    private void UIElement_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-    //    {
-    //        //until we had a StaysOpen flag to Drawer, this will help with scroll bars
-    //        //var dependencyObject = Mouse.Captured as DependencyObject;
+        private void btnMovies_Click(object sender, RoutedEventArgs e)
+        {
+            spContent.Children.Clear();
+            spContent.Children.Add(new MovieUserControl());
+        }
 
-    //        //while (dependencyObject != null)
-    //        //{
-    //        //    if (dependencyObject is ScrollBar) return;
-    //        //    dependencyObject = VisualTreeHelper.GetParent(dependencyObject);
-    //        //}
+        //    private void UIElement_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        //    {
+        //        //until we had a StaysOpen flag to Drawer, this will help with scroll bars
+        //        //var dependencyObject = Mouse.Captured as DependencyObject;
 
-    //        //MenuToggleButton.IsChecked = false;
-    //    }
-    //    private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)
-    //    {
-    //        //var sampleMessageDialog = new SampleMessageDialog
-    //        //{
-    //        //    Message = { Text = ((ButtonBase)sender).Content.ToString() }
-    //        //};
+        //        //while (dependencyObject != null)
+        //        //{
+        //        //    if (dependencyObject is ScrollBar) return;
+        //        //    dependencyObject = VisualTreeHelper.GetParent(dependencyObject);
+        //        //}
 
-    //        //await DialogHost.Show(sampleMessageDialog, "RootDialog");
-    //    }
+        //        //MenuToggleButton.IsChecked = false;
+        //    }
+        //    private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)
+        //    {
+        //        //var sampleMessageDialog = new SampleMessageDialog
+        //        //{
+        //        //    Message = { Text = ((ButtonBase)sender).Content.ToString() }
+        //        //};
 
-    //    private void OnCopy(object sender, ExecutedRoutedEventArgs e)
-    //    {
-    //        if (e.Parameter is string stringValue)
-    //        {
-    //            try
-    //            {
-    //                Clipboard.SetDataObject(stringValue);
-    //            }
-    //            catch (Exception ex)
-    //            {
-    //                Trace.WriteLine(ex.ToString());
-    //            }
-    //        }
-    //    }
-    //    private void MenuToggleButton_OnClick(object sender, RoutedEventArgs e)
-    //=> DemoItemsSearchBox.Focus();
+        //        //await DialogHost.Show(sampleMessageDialog, "RootDialog");
+        //    }
 
-    //    private void MenuDarkModeButton_Click(object sender, RoutedEventArgs e)
-    //        => ModifyTheme(DarkModeToggleButton.IsChecked == true);
+        //    private void OnCopy(object sender, ExecutedRoutedEventArgs e)
+        //    {
+        //        if (e.Parameter is string stringValue)
+        //        {
+        //            try
+        //            {
+        //                Clipboard.SetDataObject(stringValue);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                Trace.WriteLine(ex.ToString());
+        //            }
+        //        }
+        //    }
+        //    private void MenuToggleButton_OnClick(object sender, RoutedEventArgs e)
+        //=> DemoItemsSearchBox.Focus();
 
-    //    private void FlowDirectionButton_Click(object sender, RoutedEventArgs e)
-    //        => FlowDirection = FlowDirectionToggleButton.IsChecked.GetValueOrDefault(false)
-    //            ? FlowDirection.RightToLeft
-    //            : FlowDirection.LeftToRight;
+        //    private void MenuDarkModeButton_Click(object sender, RoutedEventArgs e)
+        //        => ModifyTheme(DarkModeToggleButton.IsChecked == true);
 
-    //    private static void ModifyTheme(bool isDarkTheme)
-    //    {
-    //        var paletteHelper = new PaletteHelper();
-    //        var theme = paletteHelper.GetTheme();
+        //    private void FlowDirectionButton_Click(object sender, RoutedEventArgs e)
+        //        => FlowDirection = FlowDirectionToggleButton.IsChecked.GetValueOrDefault(false)
+        //            ? FlowDirection.RightToLeft
+        //            : FlowDirection.LeftToRight;
 
-    //        theme.SetBaseTheme(isDarkTheme ? BaseTheme.Dark : BaseTheme.Light);
-    //        paletteHelper.SetTheme(theme);
-    //    }
+        //    private static void ModifyTheme(bool isDarkTheme)
+        //    {
+        //        var paletteHelper = new PaletteHelper();
+        //        var theme = paletteHelper.GetTheme();
 
-    //    private void OnSelectedItemChanged(object sender, DependencyPropertyChangedEventArgs e)
-    //        => MainScrollViewer.ScrollToHome();
+        //        theme.SetBaseTheme(isDarkTheme ? BaseTheme.Dark : BaseTheme.Light);
+        //        paletteHelper.SetTheme(theme);
+        //    }
+
+        //    private void OnSelectedItemChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //        => MainScrollViewer.ScrollToHome();
     }
 }
