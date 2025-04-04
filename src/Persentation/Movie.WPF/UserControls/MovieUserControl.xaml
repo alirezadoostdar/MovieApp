@@ -34,6 +34,7 @@
                     <ColumnDefinition Width=".5*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -53,12 +54,22 @@
 
                 <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
                 <TextBox Grid.Row="0" Grid.Column="3"></TextBox>
-                <TextBox Grid.Row="1" Grid.Column="1"></TextBox>
+                <ComboBox Grid.Row="1" Grid.Column="1" Margin="5"></ComboBox>
                 <TextBox Grid.Row="1" Grid.Column="3"></TextBox>
                 <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
                 <TextBox Grid.Row="2" Grid.Column="3"></TextBox>
                 <TextBox Grid.Row="3" Grid.Column="1"></TextBox>
                 <TextBox Grid.Row="3" Grid.Column="3"></TextBox>
+
+                <TextBlock Grid.Row="4" Grid.Column="2">Image</TextBlock>
+                <Grid  Grid.Row="4" Grid.Column="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Margin="5 5 0 5">select Image</Button>
+                    <TextBox Margin="0 5 5 5" Grid.Column="1"></TextBox>
+                </Grid>
                 <Grid Grid.Row="4" Grid.ColumnSpan="2" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
